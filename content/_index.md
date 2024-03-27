@@ -1,11 +1,11 @@
 ---
-title : "Build with Amazon Simple Email Service"
+title : "Start with Amazon Simple Email Service"
 date : "`r Sys.Date()`"
 weight : 1
 chapter : false
 ---
 
-# Build with Amazon Simple Email Service
+# Start with Amazon Simple Email Service
 
 #### Overview
 
