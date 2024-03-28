@@ -1,5 +1,5 @@
 ---
-title : "Workshop at an AWS Event"
+title : "Workshop at AWS Event"
 date :  "`r Sys.Date()`" 
 weight : 3
 chapter : false
