@@ -62,4 +62,4 @@ A sample JSON response is provided below:
 
 Otherwise, you can access the [Amazon SES console](https://us-east-1.console.aws.amazon.com/ses/) , click on ` Identities ` on the left sidebar and verify that your domain identity has the identity status reflected as ` Verified `.
 
-![Identity](/images/1-WorkshopDomain/identity.png?featherlight=false&width=70pc)
+![Identity](/images/1.3-WorkshopDomain/identity.png?featherlight=false&width=70pc)
