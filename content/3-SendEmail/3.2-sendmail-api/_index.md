@@ -1,73 +1,96 @@
 ---
-title : "Create Subnet"
+title : "SendEmail API"
 date : "`r Sys.Date()`"
 weight : 2
 chapter : false
 pre : " <b> 3.2 </b> "
 ---
 
-## Create Subnet
+## Sending Formatted Email using SendEmail API
 
-1. In the **VPC** Interface:
-   - Select **Subnets**
-   - Select **Create subnet**
-   
-   ![Create VPC](/images/2/0001.png?featherlight=false&width=90pc)
+### Using the SendEmail API
+In this section, we will guide you on how to use the AWS SDK for Python (Boto3) to send emails using SES. We will create an AWS Lambda function to demonstrate email sending, which will be triggered by an event.
 
-2. In the **Create subnet** Interface:
-   - Select **ASG** VPC
-   
-   ![Create VPC](/images/2/0002.png?featherlight=false&width=90pc)
+### Create an AWS Lambda function
+1. Navigate to the [Lambda console](https://console.aws.amazon.com/lambda/), and click on **Functions**.
+2. Click on **Create function**.
+![Lambda console](/images/3-Sendmail/3.2-api/0001.png?featherlight=false&width=70pc)
+3. Select **Author from scratch**.
+4. Provide the following information:
+- **Function name**: `send-email-demo`
+- **Runtime**: `Python 3.9` (or a later version)
+- **Architecture**: `x86_64`
+5. Click **Create function** to confirm.
+![Lambda create](/images/3-Sendmail/3.2-api/0002.png?featherlight=false&width=70pc)
+6. Under **Code source**, copy your code as follows:
+```
+import boto3
+from botocore.exceptions import ClientError
 
-3. Implement **Subnet Settings**:
-   - **Subnet name**: Enter **`Public Subnet 1`**
-   - Select AZ **ap-southeast-1a**
-   - **IPv4 CIDR block**: Import **`10.10.1.0/24`** according to the architecture description
-   - Select **Create subnet**
-   
-   ![Create VPC](/images/2/0003.png?featherlight=false&width=90pc)
+def lambda_handler(event, context):
+    ses_client = boto3.client('ses')
+    sender_email = "sender@example.com"
+    recipient_email = "recipient@example.com"
 
-4. Finish Creating **Subnet**
-   
-   ![Create VPC](/images/2/0004.png?featherlight=false&width=90pc)
+    try:
+        response = ses_client.send_email(
+            Source=sender_email,
+            Destination={
+                'ToAddresses': [recipient_email]
+            },
+            Message={
+                'Subject': {
+                    'Data': 'Company Newsletter'
+                },
+                'Body': {
+                    'Text': {
+                        'Data': 'This is the content of the company newsletter.'
+                    }
+                }
+            }
+        )
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+    else:
+        print("Email sent! Message ID: ", response['MessageId'])
+```
+Replace `sender@example.com` with your verified sender email address and `recipient@example.com` with the recipient email address.
+7. Click **Deploy**
+![Lambda function content](/images/3-Sendmail/3.2-api/0003.png?featherlight=false&width=70pc)
 
-5. Follow the same steps to create more subnets:
-   - **Public subnet 2** with **CIDR** of **`10.10.2.0/24`** located in **Availability Zone ap-southeast-1b**
-   
-   ![Create VPC](/images/2/0005.png?featherlight=false&width=90pc)
+### Grant the Lambda function least privilege access for Amazon SES
+1. Go to **Configuration** and then **Permissions**.
+2. In the **Execution role** section, click on [your-role-name].
+![Lambda function role](/images/3-Sendmail/3.2-api/0004.png?featherlight=false&width=70pc)
+3. This will open the IAM console in a new tab. Click Add permissions and then Create inline policy in the drop-down list.
+4. Provide a name for the policy, such as `Lambda_SES`, and then click **Create policy**. Now, your Lambda function has the necessary permissions to send emails using Amazon SES.
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "ses:SendEmail",
+      "Resource": "*"
+    }
+  ]
+}
+```
+![Policy](/images/3-Sendmail/3.2-api/0005.png?featherlight=false&width=70pc)
+![Policy create](/images/3-Sendmail/3.2-api/0006.png?featherlight=false&width=70pc)
+![Policy review](/images/3-Sendmail/3.2-api/0007.png?featherlight=false&width=70pc)
 
-   - **Private subnet 1** with **CIDR** of **`10.10.3.0/24`** located in **Availability Zone ap-southeast-1a**
-   
-   ![Create VPC](/images/2/0006.png?featherlight=false&width=90pc)
-
-   - **Private subnet 2** with **CIDR** of **`10.10.4.0/24`** located in **Availability Zone ap-southeast-1b**
-   
-   ![Create VPC](/images/2/0007.png?featherlight=false&width=90pc)
-
-> **Note:** You can see there are 2 columns: **Availability Zone** and **Availability Zone ID**. To avoid uneven usage of EC2 resources (for example, using AZ a for primary and AZ b for standby), AWS randomly assigns **Availability Zone** into **Availability Zone ID**. Availability Zone is an alias, and Availability Zone ID is the identifier. For instance, in the image above, Availability Zone ap-southeast-1a is assigned the Availability Zone ID apse1-az2. In another AWS account, Availability Zone ap-southeast-1a may have an Availability Zone ID of apse1-az1.
-
-   ![Create VPC](/images/2/0008.png?featherlight=false&width=90pc)
-
-## Allow Automatic Allocation of Public IP Addresses for 2 Public Subnets
-
-> **Tip:** Another important point to note is that even though the subnets are the same, configuring the routing table and allocating a public IP address allows us to distinguish between Public and Private Subnets.
-
-6. In the **VPC** Interface:
-   - Select **Subnets**
-   - Select **Public Subnet 1**
-   - Select **Actions**
-   - Select **Edit subnet settings**
-   
-   ![Create VPC](/images/2/0009.png?featherlight=false&width=90pc)
-
-7. Under **Auto-assign IP settings**:
-   - Select **Enable auto-assign public IPv4 address**
-   - Select **Save**
-   
-   ![Create VPC](/images/2/00010.png?featherlight=false&width=90pc)
-
-8. Repeat the same process for **Public subnet 2**.
-
-   ![Create VPC](/images/2/00011.png?featherlight=false&width=90pc)
-
-   ![Create VPC](/images/2/00012.png?featherlight=false&width=90pc)
+### Call the API function to send email
+1. Return [Lambda console](https://console.aws.amazon.com/lambda/), and click on **Functions**.
+2. Select the send-email-demo function we created earlier
+3. Click on the down arrow next to **Test**.
+4. Click on **Configure test event**.
+![Test Event](/images/3-Sendmail/3.2-api/0008.png?featherlight=false&width=70pc)
+5. Select Create new test event.
+6. Provide an event name, such as `TestEvent`. You don't need to modify the JSON input, as we are not using it in this example. Click Create.
+![Trigger Test Event](/images/3-Sendmail/3.2-api/0009.png?featherlight=false&width=70pc)
+![Trigger Test Event](/images/3-Sendmail/3.2-api/0010.png?featherlight=false&width=70pc)
+7. With the `TestEvent` selected, click **Test** again.
+If the email was sent successfully, you'll see a green **Execution result** box with a success message and the email's message ID. Check the recipient's mailbox to confirm that the email arrived with the specified subject and content. Keep in mind that the email might end up in the spam folder.
+![Test Event Result](/images/3-Sendmail/3.2-api/0011.png?featherlight=false&width=70pc)
+Congratulations! You have successfully set up an AWS Lambda function using the AWS SDK for Python (Boto3) to send emails with Amazon SES. You can now modify the Lambda function code to send emails programmatically from your applications as needed.
