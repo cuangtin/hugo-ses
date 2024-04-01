@@ -1,75 +1,97 @@
 ---
-title : "Create Security Group"
+title : "AWS CLI"
 date : "`r Sys.Date()`"
-weight : 5
+weight : 3
 chapter : false
-pre : " <b> 3.5 </b> "
+pre : " <b> 3.4 </b> "
 ---
 
-## Create Security Groups
+## Sending Test Email using the AWS CLI
+In this lab, you will learn how to send an email using Amazon Simple Email Service (SES) v2 with AWS CLI. In practice, developers can use the AWS CLI to quickly test their email deliverability and SES configurations. We will show you how to quickly send a formatted test email and how to use the [Mailbox Simulator](https://docs.aws.amazon.com/ses/latest/dg/send-an-email-from-console.html#send-email-simulator) to send a test email that to an address that will mimic behaviors such as successful delivery, bounce, complaint, etc. We will see how testing can be useful in [4.5: Testing Event Notifications for your Configuration Sets](4.5-test-event-noti) when we look at testing our configuration sets event notifications.
 
-### Create Security Group for Servers in Public Subnet
+{{% notice note %}}
+This lab can only be done using the Amazon SES API and not in the Amazon SES console.
+{{% /notice %}}
 
-1. In the **VPC** interface:
-    - Select **Security Group**
-    - Select **Create security group**
+### Sending Formatted Email (Simple)
+Using the SendEmail API in [3.2: Sending Formatted Email using SendEmail API](3.2-sendmail-api), you can send emails directly from the AWS CLI.
 
-    ![Create VPC](/images/5/0001.png?featherlight=false&width=90pc)
+{{< tabs groupId="send-formmated-email" >}}
+{{% tab name="Verified Email Address" %}}
 
-2. Configure the **Security Group**:
-    - **Security Group name**: Enter **Public subnet - SG**
-    - **Description**: Enter **Allow SSH and Ping for servers in the public subnet.**
-    - Select the **ASG** VPC
+Use the following command to send an email to a verified email address:
+```
+aws sesv2 send-email \
+    --from-email-address sender@example.com \
+    --destination ToAddresses=recipient@example.com \
+    --content '{"Simple": {"Subject": {"Data": "Test Email","Charset": "UTF-8"},"Body": {"Text": {"Data": "This is a test email sent using the AWS CLI SESv2.","Charset": "UTF-8"},"Html": {"Data": "This is a test email sent using the AWS CLI SESv2.","Charset": "UTF-8"}}}}'
+```
+Replace sender@example.com with your own verified sending email address and `recipient@example.com` with the corresponding receiver's email address. If you are in a Production environment, you can send email to unverified email addresses.
 
-    ![Create VPC](/images/5/0002.png?featherlight=false&width=90pc)
+Once done, you can open the recipient's mailbox to verify that the email is sent successfully.
 
-3. Configure **Inbound rules**:
-    - In **Inbound rules**, click **Add rule**.
-    - Select **Type**: **SSH** and **Source**: **My IP**. (Use your public IPv4 address)
-    - Select **Add rule** to add a new rule.
-    - Select **Type**: **All ICMP - IPv4** and **Source**: **Anywhere**. Allow ping from any IP address.
+{{% /tab %}}
+{{% tab name="Success" %}}
 
-    ![Create VPC](/images/5/0003.png?featherlight=false&width=90pc)
+Use the following command to send an email to the bounce mailbox simulator address:
+```
+aws sesv2 send-email \
+    --from-email-address sender@example.com \
+    --destination ToAddresses=success@simulator.amazonses.com \
+    --content '{"Simple": {"Subject": {"Data": "Test Email to Success Mailbox Simulator","Charset": "UTF-8"},"Body": {"Text": {"Data": "This is a test email to the success mailbox simulator.","Charset": "UTF-8"},"Html": {"Data": "This is a test email to the success mailbox simulator.","Charset": "UTF-8"}}}}'
+```
+Replace `sender@example.com` with your own verified sending email address.
 
-4. Check **Outbound rules** and select **Create security group**
+{{% /tab %}}
+{{% tab name="Bounce" %}}
 
-    ![Create VPC](/images/5/0004.png?featherlight=false&width=90pc)
+Use the following command to send an email to the bounce mailbox simulator address:
+```
+aws sesv2 send-email \
+    --from-email-address sender@example.com \
+    --destination ToAddresses=bounce@simulator.amazonses.com \
+    --content '{"Simple": {"Subject": {"Data": "Test Email to Bounce Mailbox Simulator","Charset": "UTF-8"},"Body": {"Text": {"Data": "This is a test email to the bounce mailbox simulator.","Charset": "UTF-8"},"Html": {"Data": "This is a test email to the bounce mailbox simulator.","Charset": "UTF-8"}}}}'
+```
+Replace `sender@example.com` with your own verified sending email address.
 
-5. Complete the creation of the security group for the server located in the public subnet
+{{% /tab %}}
+{{% tab name="Out-of-the-Office" %}}
 
-    ![Create VPC](/images/5/0005.png?featherlight=false&width=90pc)
+Use the following command to send an email to the auto-reply (out-of-the-office) mailbox simulator address:
+```
+aws sesv2 send-email \
+    --from-email-address sender@example.com \
+    --destination ToAddresses=ooto@simulator.amazonses.com \
+    --content '{"Simple": {"Subject": {"Data": "Test Email to Out-of-the-Office Mailbox Simulator","Charset": "UTF-8"},"Body": {"Text": {"Data": "This is a test email to the Out-of-the-Office mailbox simulator.","Charset": "UTF-8"},"Html": {"Data": "This is a test email to the Out-of-the-Office mailbox simulator.","Charset": "UTF-8"}}}}'
+```
+Replace `sender@example.com` with your own verified sending email address.
 
-### Create a Security Group for a Server in a Private Subnet
+{{% /tab %}}
+{{% tab name="Complaint" %}}
 
-6. In the **VPC** interface:
-    - Select **Security Groups**
-    - Select **Create security group**
+Use the following command to send an email to the complaint mailbox simulator address:
+```
+aws sesv2 send-email \
+    --from-email-address sender@example.com \
+    --destination ToAddresses=complaint@simulator.amazonses.com \
+    --content '{"Simple": {"Subject": {"Data": "Test Email to Complaint Mailbox Simulator","Charset": "UTF-8"},"Body": {"Text": {"Data": "This is a test email to the complaint mailbox simulator.","Charset": "UTF-8"},"Html": {"Data": "This is a test email to the complaint mailbox simulator.","Charset": "UTF-8"}}}}'
+```
+Replace `sender@example.com` with your own verified sending email address.
 
-    ![Create VPC](/images/5/0006.png?featherlight=false&width=90pc)
+{{% /tab %}}
+{{% tab name="Suppression List" %}}
 
-7. Configure the **Security Group**:
-    - In the **Security group name** field, enter **Private subnet - SG**
-    - In the **Description** section, enter **Allow SSH and Ping for servers in the private subnet.**
-    - Select the **VPC** named **ASG**
+While we will be learning more about suppression lists in [5. Email Templates and Personalization](5-ListAndSubscription), you can use the following command to simulate a hard bounce as if the recipient's address is on the global suppression list.
+```
+aws sesv2 send-email \
+    --from-email-address sender@example.com \
+    --destination ToAddresses=suppressionlist@simulator.amazonses.com \
+    --content '{"Simple": {"Subject": {"Data": "Test Email to Suppression List Mailbox Simulator","Charset": "UTF-8"},"Body": {"Text": {"Data": "This is a test email to the suppression list mailbox simulator.","Charset": "UTF-8"},"Html": {"Data": "This is a test email to the suppression list mailbox simulator.","Charset": "UTF-8"}}}}'
+```
+Replace `sender@example.com` with your own verified sending email address.
 
-    ![Create VPC](/images/5/0007.png?featherlight=false&width=90pc)
+{{% /tab %}}
+{{< /tabs >}}
 
-8. Configure **Inbound rules**:
-    - In **Inbound rules**, select **Add rule**.
-    - Select **Type**: **SSH** and leave **Source**: **Custom**. Search and select **Public subnet SG** to allow SSH from servers in the public subnet.
-    
-    ![Create VPC](/images/5/0008.png?featherlight=false&width=90pc)
-
-9. Select **Add rule** to add a new rule:
-    - Select **Type**: **All ICMP IPv4** and **Source**: **Anywhere**. Allow ping from any IP address.
-
-    ![Create VPC](/images/5/0009.png?featherlight=false&width=90pc)
-
-10. Select **Create security group**
-
-    ![Create VPC](/images/5/00010.png?featherlight=false&width=90pc)
-
-11. Two **Security Groups** have been created for servers located in the public and private subnets:
-    - Next, we will proceed to create two EC2 servers.
-
-    ![Create VPC](/images/5/00011.png?featherlight=false&width=90pc)
+### Sending MIME Format Email (Raw)
+Alternatively, similar to [3. Sending MIME Format Email using SendRawEmail API](/../../3.3-sendrawmail-api), you can also choose to send a raw MIME format using the SendRawEmail API.
