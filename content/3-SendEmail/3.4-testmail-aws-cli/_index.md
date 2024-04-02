@@ -7,7 +7,7 @@ pre : " <b> 3.4 </b> "
 ---
 
 ## Sending Test Email using the AWS CLI
-In this lab, you will learn how to send an email using Amazon Simple Email Service (SES) v2 with AWS CLI. In practice, developers can use the AWS CLI to quickly test their email deliverability and SES configurations. We will show you how to quickly send a formatted test email and how to use the [Mailbox Simulator](https://docs.aws.amazon.com/ses/latest/dg/send-an-email-from-console.html#send-email-simulator) to send a test email that to an address that will mimic behaviors such as successful delivery, bounce, complaint, etc. We will see how testing can be useful in [4.5: Testing Event Notifications for your Configuration Sets](4.5-test-event-noti) when we look at testing our configuration sets event notifications.
+In this lab, you will learn how to send an email using Amazon Simple Email Service (SES) v2 with AWS CLI. In practice, developers can use the AWS CLI to quickly test their email deliverability and SES configurations. We will show you how to quickly send a formatted test email and how to use the [Mailbox Simulator](https://docs.aws.amazon.com/ses/latest/dg/send-an-email-from-console.html#send-email-simulator) to send a test email that to an address that will mimic behaviors such as successful delivery, bounce, complaint, etc. We will see how testing can be useful in [4.5: Testing Event Notifications for your Configuration Sets](4.5-test-event-notification) when we look at testing our configuration sets event notifications.
 
 {{% notice note %}}
 This lab can only be done using the Amazon SES API and not in the Amazon SES console.
