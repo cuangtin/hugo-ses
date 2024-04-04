@@ -11,7 +11,7 @@ chapter : false
 
 In this workshop, you will learn how to set up and use Amazon Simple Email Service (SES) to send secure and successful emails. You will learn how to configure SES settings, send personalized emails, manage email sending, use advanced features, secure emails, and troubleshoot common issues. The workshop will provide a scenario-based approach to help you understand how to use SES in real-life situations.
 
-![SES](../images/1-Introduce/serviceicon.png?featherlight=false&width=10pc)
+![SES](../images/1/serviceicon.png?featherlight=false&width=10pc)
 
 #### Content
 
