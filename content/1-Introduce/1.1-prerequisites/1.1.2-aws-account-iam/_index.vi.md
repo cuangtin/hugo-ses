@@ -6,30 +6,32 @@ chapter : false
 pre : " <b> 1.1.2 </b> "
 ---
 
-In order to interact with AWS services, you need an AWS account. Furthermore, you need an IAM user for this account that you can use to log into the AWS Management Console, so that you can provision and configure you resources.
+Để có thể sử dụng các dịch vụ trong AWS, bạn cần 1 tài khoản AWS. Ngoài ra, bạn cũng cần một tài khoản IAM thuộc tài khoản AWS này cho phép bạn cung cấp và cấu hình quyền sử dụng tài nguyên của bạn.
 
-[AWS Identity and Access Management (IAM)](https://aws.amazon.com/iam/) enables you to manage access to AWS services and resources securely. Using IAM, you can create and manage AWS users and groups, and use permissions to allow and deny their access to AWS resources.
+[AWS Identity and Access Management (IAM)](https://aws.amazon.com/iam/) cho phép bạn quản lý quyền truy cập và các dịch vụ và tài nguyên của AWS 1 cách an toàn.
 
-#### Bringing your own AWS account
+#### Thiết lập tài khoản AWS cho riêng mình
 
-The regular case is that you have to bring your own AWS account, configured with an IAM user with administrator privileges. If possible, this should be a sandbox account away from any company production resources (if applicable).
+Trường hợp phổ biến là bạn thiết lập 1 tài khoản người dùng IAM với quyền quản trị viên. Nếu được, đây nên là tài khoản sandbox, tách biệt hoàn toàn với tài nguyên hệ thống đang vận hành của công ty hiện tại.
 
-If you don't have an AWS account yet, and you want to repeat this workshop for yourself later, you can create a free account [here](https://portal.aws.amazon.com/billing/signup).
+Nếu bạn chưa có tài khoản AWS, hãy đăng kí miên phí [tại đây](https://portal.aws.amazon.com/billing/signup).
 
-#### Create IAM User
+#### Tạo tài khoản người dùng IAM
 
-Now proceed to creating an IAM user to login with for the purposes of this workshop.
+Tiến hành tạo tài khoản IAM phục vụ nhu cầu của workshop:
+1. Khi đã có tài khoản AWS, tạo 1 tài khoản IAM có quyền truy cập vào tài khoản AWS: [Tạo tài khoản IAM](https://console.aws.amazon.com/iam/home?#/users$new)
+    ![Create IAM User](/hugo-ses/images/1/2/navigate.png?featherlight=false&width=70pc)
+    ![Create IAM User](/hugo-ses/images/1/2/create.png?featherlight=false&width=70pc)
 
-1. Once you have an AWS account, create a new IAM user for this workshop with access to the AWS account: [Create a new IAM user to use for the workshop](https://console.aws.amazon.com/iam/home?#/users$new)
+2. Nhập thông tin của người dùng chọn chọn Access Type as AWS Management Console Access.
+    ![Fill in Credentials](/hugo-ses/images/1/2/account-info.png?featherlight=false&width=70pc)
 
-2. Enter the user details and select Access Type as AWS Management Console Access. 
-<!-- image -->
-3. Attach the following managed policies from Attach Existing Policies directly:
-
+3. Đính kèm các chính sách sau qua Attach Policies directly:
     AWSCloudFormationFullAccess, AmazonSESFullAccess, AmazonSNSFullAccess, AmazonDynamoDBFullAccess, CloudWatchFullAccess, IAMFullAccess
+    ![Attach Policies](/hugo-ses/images/1/2/attack-policies.png?featherlight=false&width=70pc)
 
-    Click Next → Ignore Tags → Next Review
+4. Click Create user.
+    ![Reviews](/hugo-ses/images/1/2/reviews.png?featherlight=false&width=70pc)
+    ![Store Credentials](/hugo-ses/images/1/2/store-access.png?featherlight=false&width=70pc)
 
-4. Click Create user to create the new user.
-
-5. Now you can log into the [AWS Console](https://aws.amazon.com/console/) with the user you have created with IAM.
+5. Giờ bạn có thể đăng nhập vào [bảng điều khiển](https://aws.amazon.com/console/) với tài khoản IAM bạn vừa tạo.

@@ -14,7 +14,7 @@ Amazon Simple Email Service (SES) is a cloud-based email sending service that he
 
 [The AWS SES API](https://docs.aws.amazon.com/ses/latest/APIReference/) is the original API provided by AWS for sending and receiving emails. It is a relatively simple API that provides basic functionality for sending and receiving emails. The API has been around for several years and is well established in the market.
 
-#### SESV2 API
+#### AWS SESV2 API
 
 [The SESV2 API](https://docs.aws.amazon.com/ses/latest/APIReference-V2/) is the next generation API for sending and receiving emails. The API includes several new features, including the ability to manage [lists and subscriptions](https://docs.aws.amazon.com/ses/latest/dg/sending-email-list-management.html) natively within SES, manage [dedicated IP Pools](https://docs.aws.amazon.com/ses/latest/dg/dedicated-ip-pools.html), and the ability to interact with the [Virtual Deliverability Manager](https://docs.aws.amazon.com/ses/latest/dg/vdm.html) through the API.
 

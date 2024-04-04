@@ -26,11 +26,11 @@ Now proceed to creating an IAM user to login with for the purposes of this works
 
 2. Enter the user details and select Access Type as AWS Management Console Access.
     ![Fill in Credentials](/hugo-ses/images/1/2/account-info.png?featherlight=false&width=70pc)
-3. Attach the following managed policies from Attach Existing Policies directly:
+3. Attach the following managed policies from Attach Policies directly:
 
     AWSCloudFormationFullAccess, AmazonSESFullAccess, AmazonSNSFullAccess, AmazonDynamoDBFullAccess, CloudWatchFullAccess, IAMFullAccess
 
-    ![Attach Policies](/hugo-ses/images/1-Introduce-Prerequisites/2/attack-policies.png?featherlight=false&width=70pc)
+    ![Attach Policies](/hugo-ses/images/1/2/attack-policies.png?featherlight=false&width=70pc)
 
 4. Click Create user to create the new user.
     ![Reviews](/hugo-ses/images/1/2/reviews.png?featherlight=false&width=70pc)

@@ -1,26 +1,43 @@
 ---
-title : "Tường lửa trong VPC"
-date :  "`r Sys.Date()`" 
-weight : 2 
+title : "Danh tính email và tên miền"
+date : "`r Sys.Date()`"
+weight : 2
 chapter : false
 pre : " <b> 2. </b> "
 ---
 
-#### Tường lửa trong VPC
+### Tạo và xác thực danh tính
+Qua bài lab này, chúng ta sẽ khám phá quá trình tạo và xác thực danh tính email cũng như tên miền sử dụng Amazon Simple Email Service (SES). Quản lý danh tính của email và tên miền 1 cách đúng đắn là cần thiết để gia tăng danh tiếng của người gửi và cải thiện khả năng gửi mail.
 
-Trong phần này, chúng ta sẽ cùng tìm hiểu các tính năng bảo mật cơ bản trong Amazon VPC như tính năng tường lửa Security Group và Network Access Control Lists.
+#### Kịch bản
+Công ty AWSomeNewsletter đang gửi thông tin 
+Your company, AWSomeNewsletter, is sending out a regular company newsletter via email. To improve your mailing reputation and ensure better email deliverability, you decide to set up a domain identity and verify it with Amazon SES. You will also verify an email identity to use as the sender address for your newsletter. In this workshop, we will guide you through setting up a domain identity, verifying an email identity, and configuring a custom MAIL FROM domain.
 
-Một security group hoạt động như một tường lửa ảo cho EC2 Instance, giúp kiểm soát lưu lượng truy cập. Một Instance trong VPC có thể được gán tối đa 5 Security group do SG chỉ hoạt động ở tầng Instance mà không họat động ở tầng Subnet. 
+#### Email Identity and Domain Identity
 
-{{% notice note %}}
-Security groups hoạt động ở mức máy ảo, không phải ở mức subnet. Tuy nhiên, mỗi máy ảo trong một subnet có thể được gán với nhiều bộ Security group khác nhau.
-{{% /notice %}}
+{{< tabs groupId="config" >}}
+{{% tab name="Email Identity" %}}
 
-Danh sách kiểm soát truy cập mạng (ACL) là lớp bảo mật tùy chọn cho VPC, nó hoạt động như một tường lửa để kiểm soát lưu lượng ra và vào cho một hoặc nhiều subnet. 
-Ta có thể thiết lập network ACL với các rule tương tự như security groups, nhằm bổ sung thêm một lớp bảo mật nữa cho VPC.
+An email identity represents a specific email address. When you verify an email identity, you can use it as the sender address for your emails. However, this verification only applies to the exact email address you verified. Refer to the [email identity documentation](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-email-addresses-procedure) for more details.
 
-#### Nội dung
+{{% /tab %}}
+{{% tab name="Domain Identity" %}}
 
-- [Security groups](2.1-securitygroup/)
-- [Network ACLs](2.2-networkacls/)
-  
+A domain identity represents an entire domain. When you verify a domain identity, you can use any email address on that domain as the sender address for your emails. In addition, you can set up email authentication methods like DKIM and SPF for the domain, improving your mailing reputation and deliverability. Refer to the [domain identity documentation](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-domain-procedure)  for more details.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+For a company newsletter, we recommend using a domain identity because it allows you to use any email address on your domain as the sender address, and it enables you to set up email authentication methods.
+ 
+### Outline
+
+The purpose of this lab is to guide you through the process of setting up your email and domain identities as well as enabling DomainKeys Identified Mail (DKIM) signing. This lab will have 3 parts:
+
+1. **Creating and Verifying Email and Domain Identities**: We will discuss the differences between [email and domain identities](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html), and the benefits of using a domain identity for your company newsletter.
+2. **Domain Identity - Verified Identities**: We will walk through the process of setting up a domain identity and obtaining the required verification information for your [DNS](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-domains.html).
+
+### Content
+
+1. [Email Identities](2.1-email-identity)
+2. [Domain Identities](2.2-domain-identity)
