@@ -1,50 +1,37 @@
 ---
-title : "Setting Up Site-to-Site VPN Connection in AWS"
+title : "Lists & Subscription"
 date : "`r Sys.Date()`"
 weight : 5
 chapter : false
 pre : " <b> 5. </b> "
 ---
 
-In this guide, we will discuss how to connect an On-premise data center to Amazon VPC using a hard or soft VPN, depending on the specific requirements. To establish a Site-to-Site VPN connection, the following steps need to be taken:
+In this lab, we will cover account-level suppression list, configuration set-level suppression, list management, and subscription management using Amazon Simple Email Service (SES) for the AWSomeNewsletter company.
 
-## 1. Virtual Private Gateway (VPG) and Customer Gateway (CGW) Setup
+### Scenario
+AWSomeNewsletter is a rapidly growing company that sends out weekly newsletters and promotional emails to their customers. They want to ensure that they are maintaining a healthy email sending environment, respecting the preferences of their recipients, and complying with the best email sending practices.
 
-- **Virtual Private Gateway (VPG)**: This serves as the control center that connects the virtual private network (VPN) within AWS.
+### Introduction to Contact Lists and Subscription Topics
+In Amazon SES, you have the ability to manage your recipient information using a contact list and subscription topics. Contact lists are collections of recipient email addresses that you use to send emails. Subscription topics are used to manage and organize your recipients based on their interests, preferences, or other criteria.
 
-- **Customer Gateway (CGW)**: This component represents the hard or soft VPN device located at the Client's end.
+With Amazon SES, you can create a contact list and multiple subscription topics to help segment your recipients and send targeted, relevant content to them. This helps improve the email sending experience for both you and your recipients.
 
-## 2. VPN Tunnel Establishment
+To learn more about contact lists, subscription topics, and their use cases, refer to the [Amazon SES documentation](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/using-contact-lists.html).
 
-A VPN tunnel will be initiated as soon as data traffic is exchanged between AWS and the client's network. It is important to specify the routing type to ensure secure and efficient data transmission:
+{{% notice note %}}
+Please note that there is a limitation when using Amazon SES sandbox: For account-level suppression, bulk actions and SES API calls related to suppression list management are disabled. As a result, the steps outlined in this lab may not work if your account is still operating within the Amazon SES sandbox. Please ensure your account is out of the sandbox before proceeding with this lab.
+{{% /notice %}}
 
-- If the CGW on the client side supports Border Gateway Protocol (BGP), dynamic routing should be configured for the VPN connection.
+### Outline
+Throughout this lab, we will cover the following topics:
 
-- If not, static routing must be set up. For static routing, specific routes must be entered to establish the connection from the client's side to the VPG at AWS. Additionally, the VPC routing must be configured to allow seamless data exchange within the VPN tunnel.
+1. **Using the Account-Level Suppression List**: Learn how to work with the account-level suppression list to prevent sending emails to recipients who have previously bounced or complained. Recognize when to use account-level versus configuration set level.
+2. **Using Configuration Set-Level Suppression**: Discover how to use suppression at the configuration set level to manage email sending based on specific conditions or requirements.
+3. **List Management**: Understand how to create, maintain, and manage email lists to ensure you send emails to the right audience and keep your contacts organized.
+4. **Subscription Management**: Dive into subscription management, including creating and using Amazon SNS topics, setting up Amazon SES to publish email sending events, and managing opt-in and opt-out preferences for your recipients.
 
-## 3. VPG, CGW, and VPN Features
-
-Some key features of VPG, CGW, and VPN include:
-
-- **VPG**: The terminal component of the VPN tunnel within AWS.
-
-- **CGW**: Can be either a hardware device or a software application located at the Client's end in the VPN tunnel.
-
-- VPN tunnel connections are initiated from CGW to VPG.
-
-- VPG supports both dynamic routing (BGP) and static routing.
-
-- Each VPN connection comprises two tunnels for high availability.
-
-## 4. Lab Setup and Configuration
-
-The lab provides hands-on experience in setting up a Site-to-Site VPN connection in AWS. This solution is popular due to its cost-effectiveness and ease of configuration, as AWS offers instructions for various types of client devices. The primary responsibility of the customer is to prepare the internet connection, which will establish a secure tunnel (using IPSec) connecting to AWS via the VPN tunnel.
-
-In the lab scope, there are two VPCs: the Main office (VPC **ASG**) and the Branch office (VPC **ASG VPN**), located in different Availability Zones (AZs) to ensure network diversity. While EC2 instances can be created in each VPC with external SSH access, they cannot communicate or ping each other using private IP addresses. The goal is to configure the VPN to enable private IP addresses to communicate over the Site-to-Site VPN.
-
-![VPN](/images/6-VPNSitetoSite/vpn.png?featherlight=false&width=90pc)
-
-## Content:
-
-1. [Create **ASG VPN** VPC and subnet](5.1-createvpnenv/)
-2. [Configure Site to Site VPN and test connection with private IP](5.2-vpnsitetosite/)
+Content
+1. [Using the Account-Level Suppression List](5.1-account-level-suppression-list)
+2. [Using Configuration Set-Level Suppression](5.2-configuration-set-level-suppression)
+3. [List Management](5.3-list-management)
+4. [Subscription Management](5.4-Subscription%20Management)

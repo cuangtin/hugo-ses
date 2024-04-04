@@ -23,4 +23,4 @@ Using AWS CloudShell, a browser-based shell, you can quickly run scripts with th
 
 In the labs, you will sometimes have to upload a file to CloudShell to access it in the terminal (e.g. an email template file in HTML). To do so, click on the `` Actions `` button on the top right corner of the CloudShell and then click on `` Upload file ``.
 
-![Access](/images/1-Introduce-Prerequisites/4/cloudshell.png?featherlight=false&width=70pc)
+![Access](/images/1/4/cloudshell.png?featherlight=false&width=70pc)

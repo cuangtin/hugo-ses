@@ -16,14 +16,14 @@ To set up email sending using the SMTP interface, you'll need to:
 3. Authenticate using the SMTP credentials generated in step 1 and then send a test email through the AWS CLI.
 
 ### Create SMTP credentials for your SES account
-![[Process]](/images/3-SendMail/3.1-smtp/0001.png?featherlight=false&width=90pc)
+![[Process]](/images/3/1/0001.png?featherlight=false&width=90pc)
 
 1. Sign in to the [Amazon SES console](https://console.aws.amazon.com/ses/).
 2. In the navigation pane, choose **SMTP Settings**.
 3. Click **Create My SMTP Credentials**.
 4. Provide a name for your SMTP user, or use the default name provided by Amazon SES. Click **Create**.
 5. Download and save your SMTP credentials (IAM user access key ID and secret access key) in a secure location. You will need these credentials later. Click **Close**.
-![Store credentials](/images/3-SendMail/3.1-smtp/0002.png?featherlight=false&width=90pc)
+![Store credentials](/images/3/1/0002.png?featherlight=false&width=90pc)
 {{% notice note %}}
 You cannot view or retrieve the secret access key after this step. If you lose the secret access key, you must create new SMTP credentials.
 {{% /notice %}}
@@ -37,7 +37,7 @@ While you will not be using the command line to send messages in production, whe
 3. Under **Simple Mail Transfer Protocol (SMTP) settings**, note the following:
 - **SES SMTP endpoint**: `email-smtp.[region].amazonaws.com`, where `[region]` is the AWS region where your SES account is located.
 - **STARTTLS Port**: 25, 587, or 2587. Amazon SES reserves port 587 for explicit SSL, which we will be using in the next section.
-![[Test Connection]](/images/3-SendMail/3.1-smtp/0003.png?featherlight=false&width=90pc)
+![[Test Connection]](/images/3/1/0003.png?featherlight=false&width=90pc)
 
 ### Testing the SSL Connection
 1. Open your terminal or command prompt. The openssl command-line tool is pre-installed on most operating systems.

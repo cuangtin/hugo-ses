@@ -1,50 +1,28 @@
 ---
-title : "Setting Up Site-to-Site VPN Connection in AWS"
+title : "Email Templates and Personalization"
 date : "`r Sys.Date()`"
-weight : 5
+weight : 6
 chapter : false
-pre : " <b> 5. </b> "
+pre : " <b> 6. </b> "
 ---
 
-In this guide, we will discuss how to connect an On-premise data center to Amazon VPC using a hard or soft VPN, depending on the specific requirements. To establish a Site-to-Site VPN connection, the following steps need to be taken:
+In this lab, we will explore how to create email templates in Amazon Simple Email Service (SES) and personalize them with dynamic content. By using email templates, you can save time and effort by creating a single template that can be used for multiple emails, while also ensuring a consistent brand image across all your email communications. Personalizing your emails with dynamic content can help increase engagement and response rates.
 
-## 1. Virtual Private Gateway (VPG) and Customer Gateway (CGW) Setup
+### Scenario
+As part of your email marketing efforts, AWSomeNewsletter wants to create email templates that can be customized for each customer segment. For example, a customer interested in technology news should receive an email with technology-related content, while a customer interested in health and wellness should receive an email with health and wellness-related content. In this workshop, we will guide you through the process of creating email templates and personalizing them with dynamic content.
 
-- **Virtual Private Gateway (VPG)**: This serves as the control center that connects the virtual private network (VPN) within AWS.
+### Email Templates and Personalization
+In Amazon SES, you can create email templates using the SES API. Email templates can be customized with dynamic content, such as the recipient's name, location, or recent purchase history. Refer to the [SES documentation on email templates](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html) for more details.
 
-- **Customer Gateway (CGW)**: This component represents the hard or soft VPN device located at the Client's end.
+### Outline
+This lab will have three parts:
 
-## 2. VPN Tunnel Establishment
-
-A VPN tunnel will be initiated as soon as data traffic is exchanged between AWS and the client's network. It is important to specify the routing type to ensure secure and efficient data transmission:
-
-- If the CGW on the client side supports Border Gateway Protocol (BGP), dynamic routing should be configured for the VPN connection.
-
-- If not, static routing must be set up. For static routing, specific routes must be entered to establish the connection from the client's side to the VPG at AWS. Additionally, the VPC routing must be configured to allow seamless data exchange within the VPN tunnel.
-
-## 3. VPG, CGW, and VPN Features
-
-Some key features of VPG, CGW, and VPN include:
-
-- **VPG**: The terminal component of the VPN tunnel within AWS.
-
-- **CGW**: Can be either a hardware device or a software application located at the Client's end in the VPN tunnel.
-
-- VPN tunnel connections are initiated from CGW to VPG.
-
-- VPG supports both dynamic routing (BGP) and static routing.
-
-- Each VPN connection comprises two tunnels for high availability.
-
-## 4. Lab Setup and Configuration
-
-The lab provides hands-on experience in setting up a Site-to-Site VPN connection in AWS. This solution is popular due to its cost-effectiveness and ease of configuration, as AWS offers instructions for various types of client devices. The primary responsibility of the customer is to prepare the internet connection, which will establish a secure tunnel (using IPSec) connecting to AWS via the VPN tunnel.
-
-In the lab scope, there are two VPCs: the Main office (VPC **ASG**) and the Branch office (VPC **ASG VPN**), located in different Availability Zones (AZs) to ensure network diversity. While EC2 instances can be created in each VPC with external SSH access, they cannot communicate or ping each other using private IP addresses. The goal is to configure the VPN to enable private IP addresses to communicate over the Site-to-Site VPN.
-
-![VPN](/images/6-VPNSitetoSite/vpn.png?featherlight=false&width=90pc)
+1. **Creating Email Templates**: We will discuss how to create email templates in Amazon SES, including how to use the API to create templates.
+2. **Personalizing Email Templates with Dynamic Content**: We will learn how to personalize email templates with dynamic content, such as recipient name, location, or other attributes.
+3. **Sending Bulk Email with Templates**: We will guide you through the process of sending bulk emails using templates to ensure that your email communications look and function correctly for multiple users.
 
 ## Content:
 
-1. [Create **ASG VPN** VPC and subnet](5.1-createvpnenv/)
-2. [Configure Site to Site VPN and test connection with private IP](5.2-vpnsitetosite/)
+1. [Creating email templates](6.1-create)
+2. [Personalizing Email Templates with Dynamic Content](6.2-personalizing)
+2. [Sending Bulk Email with Templates](6.3-send-bulk)
