@@ -79,7 +79,7 @@ Replace `sender@example.com` and `recipient@example.com` with the email address 
 ### Grant the Lambda function least privilege access for Amazon SES using SendRawEmail
 1. Go to **Configuration** and then **Permissions**.
 2. In the **Execution role** section, click on [your-role-name].
-![Lambda function role](/images/3/2/0004.png?featherlight=false&width=70pc)
+![Lambda function role](/hugo-ses/images/3/2/0004.png?featherlight=false&width=70pc)
 3. This will open the IAM console in a new tab. Click Add permissions and then Create inline policy in the drop-down list.
 4. Provide a name for the policy, such as `Lambda_SES_RAW`, and then click **Create policy**. Now, your Lambda function has the necessary permissions to send emails using Amazon SES.
 ```
@@ -94,12 +94,12 @@ Replace `sender@example.com` and `recipient@example.com` with the email address 
   ]
 }
 ```
-![Policy](/images/3/2/0005.png?featherlight=false&width=70pc)
-![Policy create](/images/3/3/0001.png?featherlight=false&width=70pc)
-![Policy review](/images/3/3/0002.png?featherlight=false&width=70pc)
+![Policy](/hugo-ses/images/3/2/0005.png?featherlight=false&width=70pc)
+![Policy create](/hugo-ses/images/3/3/0001.png?featherlight=false&width=70pc)
+![Policy review](/hugo-ses/images/3/3/0002.png?featherlight=false&width=70pc)
 
 ### Test the SendRawEmail API operation
 1. Return to the Lambda function console.
 2. Make sure the TestEvent created earlier is still selected and click **Test** again.
 If the email was sent successfully, you'll see a green **Execution result** box with a success message and the email's message ID. Check the recipient's mailbox to confirm that the company newsletter arrived with the specified subject and content, as well as the pdf attachment. Keep in mind that the email might end up in the spam folder.
-![Result](/images/3/3/0003.png?featherlight=false&width=70pc)
+![Result](/hugo-ses/images/3/3/0003.png?featherlight=false&width=70pc)

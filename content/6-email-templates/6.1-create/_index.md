@@ -58,7 +58,7 @@ Create a new file named "awesome_newsletter_template.html" and add the following
 </html>
 ```
 Preview your HTML using your favorite browser or code editors. It should look similar to the following:
-![Template](/images/6/1/0001.png?featherlight=false&width=50pc)
+![Template](/hugo-ses/images/6/1/0001.png?featherlight=false&width=50pc)
 
 #### Step 2: Create the email template using the AWS CLI
 Now, we will create a new email template in Amazon SES using the AWS CLI.

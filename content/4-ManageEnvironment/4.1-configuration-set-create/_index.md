@@ -9,7 +9,7 @@ pre : " <b> 4.1 </b> "
 ## Creating configuration sets
 
 A [configuration set](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/using-configuration-sets-in-email.html) is a group of rules that you can apply to emails you send using Amazon SES. These rules help you to organize your email sending events for tracking purposes.
-![Configuration sets](/images/4/1/0001.png?featherlight=false&width=70pc)
+![Configuration sets](/hugo-ses/images/4/1/0001.png?featherlight=false&width=70pc)
 Configuration sets are a powerful tool for managing email sending operations on a per-business-unit basis. By creating a separate configuration set for each customer segment, you can manage reputation, events, and bounce handling settings specific to that segment. This granular approach allows for better control over the email sending process and can help ensure that emails are being delivered to the right recipients at the right time.
 
 For other businesses, configuration sets can be used in a similar fashion to manage email sending operations across different departments or product lines. By creating separate configuration sets for each department or product line, businesses can manage email reputation, events, and bounce handling settings specific to each segment. This approach can also help businesses maintain brand consistency across different segments and ensure that emails are being delivered to the right recipients at the right time.

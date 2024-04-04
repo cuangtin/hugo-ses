@@ -11,7 +11,7 @@ chapter : false
 
 Trong bài lab này, bạn sẽ tìm hiểu về cách thiết lập và sử dụng Amazon Simple Email Service (SES) để gửi và bảo mật email. Cấu hình SES, quản lý emails, sử dụng các tính năng nâng cao, bảo mật email và khắc phục các sự cố thường gặp. Bài lab sẽ giúp bạn tiếp cận từng bước một để bạn có thể hiểu được cách ứng dụng SES trong hoàn cảnh thực tế.
 
-![SES](../images/1-Introduce/serviceicon.png?featherlight=false&width=10pc)
+![SES](../hugo-ses/images/1-Introduce/serviceicon.png?featherlight=false&width=10pc)
 
 #### Nội dung
 

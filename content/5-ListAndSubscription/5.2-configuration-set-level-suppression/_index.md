@@ -14,7 +14,7 @@ In short, there are different levels of suppression:
 - **Override account level settings** – this will negate any account-level suppression list settings; email sent with this configuration set will not use any suppression settings at all.
 - **Override account level settings with configuration set-level suppression enabled** – email sent with this configuration set will only use the suppression conditions you enabled for it (bounces, complaints, or bounces and complaints) - regardless of what your account-level suppression list settings are, it will override them.
 And the way they interact is based on the following workflow:
-![Workflow](/images/5/1/0001.png?featherlight=false&width=50pc)
+![Workflow](/hugo-ses/images/5/1/0001.png?featherlight=false&width=50pc)
 
 Using the configuration sets we've already created in [Lab 4.1](../../4-ManageEnvironment/4.1-configuration-set-create), let's learn how to manage suppression lists on the account and configuration sets level.
 
