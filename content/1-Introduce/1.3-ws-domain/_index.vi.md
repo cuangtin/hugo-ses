@@ -1,18 +1,65 @@
 ---
-title : "Internet Gateway"
+title : "Sử dụng domain mặc định của workshop"
 date :  "`r Sys.Date()`" 
 weight : 3 
 chapter : false
 pre : " <b> 1.3 </b> "
 ---
 
+#### Những thuật ngữ quan trọng
 
-#### Internet Gateway
+Tên miền email của bạn sẽ là 1 sub-domain của domain gốc của workshop (ví dụ sesworkshop.online), kiểu {thứ tự team}.sesworkshop.online (1.sesworkshop.online hoặc 2.sesworkshop.online). Bạn có thể làm theo các bước dưới đây để xác thực domain và xác nhận domain hoạt động chính xác. Trong phần còn lại của workshop, hãy thay thế example.,com với domain của bạn.
 
-- **Internet Gateway (IGW)** là một thành phần Amazon VPC giúp các tài nguyên bên trong VPC, cụ thể là EC2, có khả năng giao tiếp với Internet. IGW có khả năng co giãn mạnh theo chiều ngang, đồng thời tính dự phòng và sẵn sàng cao. Nó hoạt động như một target trong bảng định tuyến của Amazon VPC, giúp lưu lượng truy cập được định tuyến ra ngoài Internet bằng cách biên dịch địa chỉ mạng của EC2 thành địa chỉ Public IP đã được gán cho nó.  
+#### Kiểm tra việc xác thực domain
 
-- Cụ thể hơn, các EC2 Instance bên trong VPC chỉ biết các địa chỉ Private IP được gán cho nó, nhưng khi có lưu lượng được gửi từ EC2 ra ngoài Internet, IGW sẽ biên dịch địa chỉ Private IP đó thành địa chỉ Public IP (hoặc địa chỉ EIP, sẽ thảo luận sau) mà gán với EC2, và duy trì mapping 1-1 cho tới khi địa chỉ Public IP bị release. 
+Sử dụng AWS CLI, bạn có thể kiểm tra trạng thái của domain bằng cách chạy câu lệnh sau:
 
-- Khi EC2 nhận được lưu lượng truy cập từ bên ngoài Internet, IGW sẽ thực hiện dịch địa chỉ Target (địa chỉ Public IP) thành địa chỉ Private IP của EC2 Instance và chuyển tiếp lưu lượng truy cập đến Amazon VPC.
+```
+aws sesv2 get-email-identity --email-identity {{Your domain name}}
+```
 
-![Internet Gateway](/hugo-ses/images/1-Introduce/igw.png?featherlight=false&width=60pc)
+Bạn sẽ nhận được 1 phản hồi dạng JSON trong đó giá trị `VerifiedForSendingStatus` là `true`.
+
+Dưới đây là 1 phản hồi mẫu:
+
+```
+{
+    "IdentityType": "DOMAIN",
+    "FeedbackForwardingStatus": true,
+    "VerifiedForSendingStatus": true,
+    "DkimAttributes": {
+        "SigningEnabled": true,
+        "Status": "SUCCESS",
+        "Tokens": [
+            "oc4vbmhlp2jdgulaqmj64h4a5ea6rvhi",
+            "cw3h654y4ufvu7ux4a2mf2bec3le3sw4",
+            "67cc7cuhbidfnrxmaocfq33jtdyutqfi"
+        ],
+        "SigningAttributesOrigin": "AWS_SES",
+        "NextSigningKeyLength": "RSA_2048_BIT",
+        "CurrentSigningKeyLength": "RSA_2048_BIT",
+        "LastKeyGenerationTimestamp": "2024-03-28T23:15:43.083000+07:00"
+    },
+    "MailFromAttributes": {
+        "BehaviorOnMxFailure": "USE_DEFAULT_VALUE"
+    },
+    "Policies": {},
+    "Tags": [],
+    "ConfigurationSetName": "my-first-configuration-set",
+    "VerificationStatus": "SUCCESS",
+    "VerificationInfo": {
+        "LastCheckedTimestamp": "2024-03-28T23:26:44.115000+07:00",
+        "LastSuccessTimestamp": "2024-03-28T23:26:44.441000+07:00",
+        "ErrorType": "HOST_NOT_FOUND",
+        "SOARecord": {
+            "PrimaryNameServer": "amalia.ns.cloudflare.com",
+            "AdminEmail": "dns.cloudflare.com",
+            "SerialNumber": 1
+        }
+    }
+}
+```
+
+Ngoài ra, bạn có thể truy cập [bảng điều khiển của Amazon SES](https://us-east-1.console.aws.amazon.com/ses/), chọn `Identities` bên trong thanh bên trái và xác nhận danh tính domain có status là `Verified`
+
+![Identity](/hugo-ses/images/1/3/identity.png?featherlight=false&width=70pc)

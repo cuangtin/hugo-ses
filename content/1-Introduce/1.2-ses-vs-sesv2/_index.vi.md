@@ -16,15 +16,15 @@ Amazon Simple Email Service (SES) là 1 dịch vụ gửi mail dựa trên đám
 
 #### AWS SESV2 API
 
-[The SESV2 API](https://docs.aws.amazon.com/ses/latest/APIReference-V2/) is the next generation API for sending and receiving emails. The API includes several new features, including the ability to manage [lists and subscriptions](https://docs.aws.amazon.com/ses/latest/dg/sending-email-list-management.html) natively within SES, manage [dedicated IP Pools](https://docs.aws.amazon.com/ses/latest/dg/dedicated-ip-pools.html), and the ability to interact with the [Virtual Deliverability Manager](https://docs.aws.amazon.com/ses/latest/dg/vdm.html) through the API.
+[SESV2 API](https://docs.aws.amazon.com/ses/latest/APIReference-V2/) là thế hệ API kế tiếp phục vụ việc gửi và nhận emails. API này bao gồm rất nhiều tính năng mới bao gồm khả năng quản lý [danh sách người đăng kí](https://docs.aws.amazon.com/ses/latest/dg/sending-email-list-management.html) có sẵn ở SES, quản lý [các nhóm địa chỉ IP chuyên dụng](https://docs.aws.amazon.com/ses/latest/dg/dedicated-ip-pools.html), và khả năng tưởng tác với [Virtual Deliverability Manager](https://docs.aws.amazon.com/ses/latest/dg/vdm.html) qua API.
 
-#### Why Migrating to Amazon SES API v2 is Necessary
+#### Tại sao việc nâng câos lên Amazon SES API v2 cần thiết
 
-Migrating to Amazon SES API v2 offers several benefits and ensures that you can take advantage of the latest features and improvements. By migrating, you can:
+Việc nâng cấp mang đến rất nhiều lợi ích và đảm bảo rằng bạn có thể tận dụng các tính năng và bản vá mới nhất. Khi nâng cấp, bạn có thể:
+1. **Tận dụng các chức năng mới**: Amazon SES API v2 cung cấp những tính năng và cải tiến mới trong đó tốt hơn trong khi cải thiện việc quản lý email. Khi lên phiên bản mới, bạn có thể tận dụng các tính năng này và tối ưu hoá quá trình email luân chuyển.
 
+2. **Đảm bảo ứng dụng trong tương lai**: Bởi Amazon vẫn liên tục phát triển và giới thiệu những tính năng mới, những tính năng đó sẽ được phát hành tại bản Amazon SES API v2. Nâng cấp lên bản mới nhất đảm bảo rằng ứng dụng của bạn luôn luôn được cập nhật và tương thích với những bản cập nhật trong tương lai, tránh các vấn đề tương thích và gián đoạn tiềm ẩn.
 
-1. **Leverage New Features**: Amazon SES API v2 includes new features and enhancements that provide better functionality and improved email management. By moving to the newer version, you can take advantage of these improvements and optimize your email sending process.
-2. **Future-proof Your Application**: As Amazon continues to develop and introduce new features, they will be released in the Amazon SES API v2. Migrating to the newer version ensures that your application stays up-to-date and compatible with future updates, avoiding potential compatibility issues and disruptions.
-3. **Improve Usability and Developer Experience**: Amazon SES API v2 is designed to be more user-friendly and consistent with other AWS services. By migrating, you can benefit from a more intuitive API and better error handling, making it easier to develop, maintain, and troubleshoot your email sending application.
+3. **Nâng cao khả năng sử dụng và trải nghiệm của nhà phát triển**: Amazon SES API v2 được thiết kế thân thiện với người dùng và tương thích với các dịch vụ AWS khác. Với việc nâng cấp này, bạn có thể tiếp cận API trực quan hơn và xử lý lỗi tốt hơn, giúp cho việc phát triển, bảo trì và xử lý sự cố cho ứng dụng email của bạn.
 
-In this workshop, we will be using SESv2 wherever possible, leveraging its additional features and functionality to manage our email campaigns more effectively.
+Trong workshop này, chúng ta sẽ sử dụng v2 khi có thể, tận dụng các tính năng và chức năng bổ xung để điều hành các chiến lược email một cách hiệu quả.

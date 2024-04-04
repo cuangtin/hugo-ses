@@ -18,7 +18,7 @@ Using the AWS CLI, you can check the status of your email domain by using the co
 aws sesv2 get-email-identity --email-identity {{Your domain name}}
 ```
 
-You should get the JSON response that has a key value pair of ` VerifiedForSendingStatus ` as ` true `.
+You should get the JSON response that has a key value pair of `VerifiedForSendingStatus` as `true`.
 
 A sample JSON response is provided below:
 
@@ -60,6 +60,6 @@ A sample JSON response is provided below:
 }
 ```
 
-Otherwise, you can access the [Amazon SES console](https://us-east-1.console.aws.amazon.com/ses/) , click on ` Identities ` on the left sidebar and verify that your domain identity has the identity status reflected as ` Verified `.
+Otherwise, you can access the [Amazon SES console](https://us-east-1.console.aws.amazon.com/ses/) , click on `Identities` on the left sidebar and verify that your domain identity has the identity status reflected as `Verified`.
 
 ![Identity](/hugo-ses/images/1/3/identity.png?featherlight=false&width=70pc)

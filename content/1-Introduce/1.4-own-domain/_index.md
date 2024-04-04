@@ -7,7 +7,7 @@ pre : " <b> 1.4 </b> "
 ---
 
 ### Important Terminologies
-- Root Account: the AWS account where you have hosted your root domain (e.g. example.com) in a hosted zone . You should not be working straight out of your root account for this workshop as you might inadvertently compromise your DNS configurations.
+- Root Account: the AWS account where you have hosted your root domain (e.g. example.com) in a [hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html). You should not be working straight out of your root account for this workshop as you might inadvertently compromise your DNS configurations.
 - Service Account: the AWS account where you will be hosting and verifying your email domain (e.g. sesworkshop.example.com) to be used for this workshop.
 
 For this workshop, your email domain will be a sub-domain of your root domain. You can follow the steps below to delegate your root domain hosted zone to the service account.
