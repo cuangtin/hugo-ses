@@ -7,6 +7,7 @@ pre : " <b> 1.4 </b> "
 ---
 
 ### Important Terminologies
+
 - Root Account: the AWS account where you have hosted your root domain (e.g. example.com) in a [hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html). You should not be working straight out of your root account for this workshop as you might inadvertently compromise your DNS configurations.
 - Service Account: the AWS account where you will be hosting and verifying your email domain (e.g. sesworkshop.example.com) to be used for this workshop.
 
@@ -19,21 +20,24 @@ This will NOT happen in the root account. You will be creating the sub-domains i
 These hosted zones MUST be **PUBLIC Hosted Zones**.
 {{% /notice %}}
 
-The zoneName must be suffixed with whatever you purchased as your root domain. Assuming your root domain is ` example.com ` the hosted zone name will be something like ` sesworkshop.example.com `.
+The zoneName must be suffixed with whatever you purchased as your root domain. Assuming your root domain is `example.com` the hosted zone name will be something like `sesworkshop.example.com`.
 
 ### Create DNS records in the root account
-First, go into your **root account**, and then to the Route53 console, and click on the hosted zone that you registered your domain in Route53 with, and get the hosted zone id. It should be a string like: ` Z02271753ICPZ8MJC84MI `
+First, go into your **root account**, and then to the Route53 console, and click on the hosted zone that you registered your domain in Route53 with, and get the hosted zone id. It should be a string like: `Z02271753ICPZ8MJC84MI`
+![Zone Id](/hugo-ses/images/1/4/0001.png?featherlight=false&width=70pc)
 
 Second, go into your **service account**, and go to the route53 console, and click on the hosted zone that you just created. It should look something like this:
+![DNS records](/hugo-ses/images/1/4/0002.png?featherlight=false&width=70pc)
 
 Look at the NS record, and copy the contents of the "Value" field. Now, go back to the root account, and add a NS record for DNS delegation. The value should be the name servers from the **service account hosted zone**.
 
 Once done, your hosted zone in your **root account** should have the NS record like this:
+![DNS records](/hugo-ses/images/1/4/0003.png?featherlight=false&width=70pc)
 
 ### Check to see if the DNS records resolve
 Wait 5-10 minutes after the DNS entries deploy to your root account hosted zone in order to do this check.
 
-Go to your terminal and run ` host -a sesworkshop.example.com `.
+Go to your terminal and run `host -a sesworkshop.example.com`.
 
 The output should look something like:
 

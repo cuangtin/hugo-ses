@@ -14,7 +14,7 @@ Your company, AWSomeNewsletter, is sending out a regular company newsletter via 
 
 #### Email Identity and Domain Identity
 
-{{< tabs groupId="config" >}}
+{{< tabs groupId="email-domain-identity" >}}
 {{% tab name="Email Identity" %}}
 
 An email identity represents a specific email address. When you verify an email identity, you can use it as the sender address for your emails. However, this verification only applies to the exact email address you verified. Refer to the [email identity documentation](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-email-addresses-procedure) for more details.
@@ -31,7 +31,7 @@ For a company newsletter, we recommend using a domain identity because it allows
  
 ### Outline
 
-The purpose of this lab is to guide you through the process of setting up your email and domain identities as well as enabling DomainKeys Identified Mail (DKIM) signing. This lab will have 3 parts:
+The purpose of this lab is to guide you through the process of setting up your email and domain identities as well as enabling DomainKeys Identified Mail (DKIM) signing. This lab will have 2 parts:
 
 1. **Creating and Verifying Email and Domain Identities**: We will discuss the differences between [email and domain identities](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html), and the benefits of using a domain identity for your company newsletter.
 2. **Domain Identity - Verified Identities**: We will walk through the process of setting up a domain identity and obtaining the required verification information for your [DNS](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-domains.html).
