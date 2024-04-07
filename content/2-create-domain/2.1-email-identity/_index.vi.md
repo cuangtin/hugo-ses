@@ -1,33 +1,59 @@
 ---
-title : "Security Group"
+title : "Email Identities"
 date :  "`r Sys.Date()`" 
 weight : 1
 chapter : false
 pre : " <b> 2.1 </b> "
 ---
-#### Security Group
 
-Một số đặc điểm cơ bản của Security group:
+### Email Identities
 
-* Chỉ có thể thêm vào các Allow rule, mà không thể bổ sung Deny rule.
-* Có thể chỉ định các rule riêng biệt cho lưu lượng truy cập đi ra hoặc đi vào.
-* Một Security group mới được tạo ra không có sẵn Inbound rules. 
-  Do đó, tại thời điểm ban đầu Instance sẽ không cho phép bất cứ lưu lượng truy cập nào được phép đi vào, đòi hỏi ta phải bổ sung Inbound rule để cấp phép truy cập.
-* Mặc định, Security group có sẵn Outbound rule cho phép mọi lưu lượng được phép đi ra khỏi Instance. 
-Rule này có thể được chỉnh sửa (xóa) và bổ sung các Outbound rule cụ thể, chỉ rõ lưu lượng nào xuất phát từ Instance được phép đi ra ngoài.
-Nếu SG không có Outbound rule thì không một lưu lượng nào được phép đi ra khỏi Instance. 
-* Security groups là một dịch vụ Stateful - nghĩa là nếu lưu lượng đi vào Instance đã được cấp phép thì lưu lượng cũng có thể đi ra ngoài Instance, và ngược lại, bất kể Outbound rule như thế nào.
-* Các Instance chỉ có thể giao tiếp được với nhau khi và chỉ khi chúng được liên kết với Security group cho phép kết nối, hoặc Security group mà Instance có liên kết chứa Rule cho phép lưu lượng try cập (ngoại trừ Security group mặc định với có các rule  mặc định cho phép toàn bộ lưu lượng được truy cập).
-* Security group được liên kết với các network interface. 
-Sau khi Instance đã được khởi tạo, ta vẫn có thể thay đổi Security group đã được gán với Instance, điều này cũng thay đổi security group đang được gán với primary network interface tương ứng. 
+Bạn sẽ cần 1 email identity được xác thực để có thể gửi mail qua Amazon SES. Bây giờ bạn có thể xác thực địa chỉ email của bạn, địa chỉ mà sẽ đại diện cho "Từ {email}" cho bản tin của công ty.
 
-#### Security group Rule
+![SES Console](/images/2/1/0001.png?featherlight=false&width=70pc)
+![Create Identity](/images/2/1/0002.png?featherlight=false&width=70pc)
 
-Rule được sinh ra để cấp quyền truy cập cho lưu lượng đi vào hoặc đi ra khỏi Instance. Quyền truy cập này có thể được áp dụng cho một CIDR cụ thể hoặc cho một Security group nằm trong cùng một VPC hoặc nằm trong một VPC khác nhưng có kết nối peering đã được khởi tạo. 
+{{% notice note %}}
+Nếu bạn đang gửi tới 1 địa chỉ email khác và bạn đang trong môi trường sandbox của SES, bạn cũng cần xác thực địa chỉ nhận bởi vì môi trường sandbox sẽ chỉ cho phép chuyển phát giữa những email được xác thực.
+{{% /notice %}}
 
-Các thành phần cơ bản của Security group rule:
-* (Chỉ đối với Inbound rules) gồm điểm xuất phát (nguồn) của lưu lượng truy cập và port đích hoặc dải port.
-Nguồn có thể là một security group khác, là một dải IPv4 hoặc IPv6 CIDR hoặc đơn thuẩn là một địa chỉ IPv4 hoặc IPv6.
-* (Chỉ đối với Outbound rules) gồm đích đến của lưu lượng và port đích hay dải port đích.
-Đích đến có thể là một security group khác, là một dải IPv4 hoặc IPv6 CIDR hoặc đơn thuẩn là một địa chỉ IPv4 hoặc IPv6 hoặc là một dịch vụ bắt đầu bằng một tiền tố (ví dụ: igw_xxx) nằm trong danh sách prefix ID(một dịch vụ được xác định bởi prefix ID - tên và ID của dịch vụ khả dụng trong region).
-* Mọi giao thức đều có một số giao thức chuẩn. Ví dụ: SSH là 22,..
+1. Mở terminal (hoặc command prompt - shell bash bạn cài AWS CLI và thiết lập các quyền IAM để truy cập SES)
+2. Nhập lệnh sau để kiểm tra xem địa chỉ email đã được xác thực hay chưa:  
+
+```
+aws sesv2 create-email-identity --email-identity example@example.com
+```
+
+Thay thế `example@example.com` với địa chỉ email của bạn.
+
+### Xác thực Email Identities
+1. Bạn sẽ nhận được email xác thực như sau, click vào link để hoàn thành quá trình xác thực:
+![Verification email](/images/2/1/0003.png?featherlight=false&width=70pc)
+
+2. Để kiểm tra trạng thái, gõ lệnh sau:
+```
+aws sesv2 get-email-identity --email-identity example@example.com
+```
+Câu lệnh trên sẽ trả về 1 json object với trạng thái xác thực của email, tương tự như sau:
+
+```
+{
+    "IdentityType": "EMAIL_ADDRESS",
+    "FeedbackForwardingStatus": true,
+    "VerifiedForSendingStatus": true,
+    "DkimAttributes": {
+        "SigningEnabled": false,
+        "Status": "NOT_STARTED",
+        "SigningAttributesOrigin": "AWS_SES",
+        "NextSigningKeyLength": "RSA_1024_BIT"
+    },
+    "MailFromAttributes": {
+        "BehaviorOnMxFailure": "USE_DEFAULT_VALUE"
+    },
+    "Policies": {},
+    "Tags": [],
+    "ConfigurationSetName": "my-first-configuration-set",
+    "VerificationStatus": "SUCCESS",
+    "VerificationInfo": {}
+}
+```

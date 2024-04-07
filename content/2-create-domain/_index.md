@@ -22,7 +22,7 @@ An email identity represents a specific email address. When you verify an email 
 {{% /tab %}}
 {{% tab name="Domain Identity" %}}
 
-A domain identity represents an entire domain. When you verify a domain identity, you can use any email address on that domain as the sender address for your emails. In addition, you can set up email authentication methods like DKIM and SPF for the domain, improving your mailing reputation and deliverability. Refer to the [domain identity documentation](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-domain-procedure)  for more details.
+A domain identity represents an entire domain. When you verify a domain identity, you can use any email address on that domain as the sender address for your emails. In addition, you can set up email authentication methods like DKIM and SPF for the domain, improving your mailing reputation and deliverability. Refer to the [domain identity documentation](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-domain-procedure) for more details.
 
 {{% /tab %}}
 {{< /tabs >}}

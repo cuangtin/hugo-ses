@@ -22,7 +22,7 @@ Công ty AWSomeNewsletter đang gửi các bản tin thường xuyên thông qua
 {{% /tab %}}
 {{% tab name="Domain Identity" %}}
 
-1 domain identity đại diện cho 1 domain cụ thể. Khi bạn xác thực 1 domain identity, bạn có thể sử dụng bất kì địa chỉ email nào thông qua domain đó như địa chỉ người gửi cho email của bạn. Ngoài ra, bạn có thể thiết lập các phương thức xác thực email như DKIM và SPF cho tên miền, cải thiện danh tiếng email của bạn và khả năng chuyển phát. Truy cập [tài liệu domain identity ](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-domain-procedure) để biết thêm chi tiết.
+1 domain identity đại diện cho 1 domain cụ thể. Khi bạn xác thực 1 domain identity, bạn có thể sử dụng bất kì địa chỉ email nào thông qua domain đó như địa chỉ người gửi cho email của bạn. Ngoài ra, bạn có thể thiết lập các phương thức xác thực email như DKIM và SPF cho tên miền, cải thiện danh tiếng email của bạn và khả năng chuyển phát. Truy cập [tài liệu domain identity](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-domain-procedure) để biết thêm chi tiết.
 
 {{% /tab %}}
 {{< /tabs >}}

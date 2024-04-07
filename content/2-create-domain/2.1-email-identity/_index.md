@@ -10,6 +10,9 @@ pre : " <b> 2.1 </b> "
 
 You'll need to have a verified identity to be able to send email through Amazon SES. For this next part of the lab, you can verify your own email address, which will act as the "From" address for your company newsletter.
 
+![SES Console](/images/2/1/0001.png?featherlight=false&width=70pc)
+![Create Identity](/images/2/1/0002.png?featherlight=false&width=70pc)
+
 {{% notice note %}}
 If you're sending to a different email address and you're in a sandbox SES environment, you'd need to also verify the recipient address because sandbox environment will only allow sending to verified email addresses.
 {{% /notice %}}
